@@ -59,5 +59,7 @@
 #define FLOAT_CMP(a, b, d) (fabs(a - b) < d)
 
 #define SWAP(type, a, b) do { type tmp = a; a = b; b = tmp;  } while(0)
+#define MIN(a, b) (((a) < (b))?(a):(b))
+#define MAX(a, b) (((a) > (b))?(a):(b))
 
 #endif // INCLUDE_UTIL_H

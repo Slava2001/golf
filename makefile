@@ -21,4 +21,8 @@ start: $(PROG_NAME)
 	./$(PROG_NAME)
 
 $(PROG_NAME): $(OBJECTS)
-	$(CC) -L$(FREEGLUT_LIB) $(OBJECTS) $(LIB_OBJECTS) $(LD_FLAGS) -o ./$(PROG_NAME)
+	$(CC) -L$(FREEGLUT_LIB) $(OBJECTS) $(LD_FLAGS) -o ./$(PROG_NAME)
+
+clean:
+	del .\src\*.o /s /q
+	del .\*.exe /s /q
