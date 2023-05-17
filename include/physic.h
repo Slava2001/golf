@@ -1,19 +1,16 @@
 #ifndef INCLUDE_PHYSIC_H
 #define INCLUDE_PHYSIC_H
 
+#include "vector.h"
+
 #include <stdbool.h>
 
 #define PHYSIC_INFINITY_MASS 0
 
 struct physic_aabb {
-    float min_x, max_x;
-    float min_y, max_y;
-    float delta_x, delta_y;
-};
-
-struct point2f {
-    float x;
-    float y;
+    struct vector2f min;
+    struct vector2f max;
+    struct vector2f delta;
 };
 
 struct physic_debug_drawer_api {
@@ -43,7 +40,8 @@ struct physic_primitive_description {
 
 struct physic_primitive {
     enum physic_primitive_type type;
-    float offset_x, offset_y, angle;
+    struct vector2f offset;
+    float angle;
     union {
         struct { // rectangle
             float h;
@@ -70,8 +68,10 @@ struct physic_object {
     struct physic_aabb aabb;
     bool is_collided;
 
-    float pos_x, pos_y, angle;
-    float speed_x, speed_y, speed_a;
+    struct vector2f pos;
+    float angle;
+    struct vector2f speed;
+    float speed_a;
 };
 
 #define PHYSIC_OBJECT_MAX_COUNT 100
@@ -108,8 +108,10 @@ int physic_add_primitive(struct physic_world *w, int od, struct physic_primitive
 /// @param w world
 /// @param od object descriptor
 /// @param impulse impulse
+/// @param point point to apply impulse
 /// @return 0 on ok, -1 on fail
-int physic_object_apply_impulse(struct physic_world *w, int od, const struct point2f *impulse);
+int physic_object_apply_impulse(struct physic_world *w, int od, const struct vector2f *impulse,
+                                                                const struct vector2f *point);
 /// @brief update phisic
 /// @param w world
 /// @param elapsed_time_s elapsed time in seconds

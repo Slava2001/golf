@@ -7,7 +7,7 @@ LD_FLAGS=-lfreeglut -lopengl32 -lm
 
 INCLUDES=./include
 
-SOURCE=./src/main.c ./src/physic.c ./src/debug_draw.c
+SOURCE=./src/main.c ./src/physic.c ./src/debug_draw.c ./src/vector.c
 OBJECTS=$(SOURCE:.c=.o)
 
 PROG_NAME=example

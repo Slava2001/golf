@@ -36,31 +36,16 @@ int main(int argc, char *argv[])
     struct physic_object_description obj_desc = {
         .pos_x = 5,
         .pos_y = 5,
-        .angle = 0,
         .mass = 1,
         .speed_a = M_PI/5
     };
     int od = physic_add_object(&world, &obj_desc);
     err_if(od == -1, "Failed to add object in world");
 
-    struct physic_primitive_description primitive_circle_desc = {
-        .type = PPT_CIRCLE,
-        .offset_x = 1,
-        .offset_y = 0,
-        .angle = M_PI_2,
-        .r = 1
-    };
-    try_do(-1 == physic_add_primitive(&world, od, &primitive_circle_desc));
-    primitive_circle_desc.offset_x = -2;
-    primitive_circle_desc.r = 2;
-    try_do(-1 == physic_add_primitive(&world, od, &primitive_circle_desc));
     struct physic_primitive_description primitive_rectangle_desc = {
         .type = PPT_RECTANGLE,
-        .offset_x = 0,
-        .offset_y = 0,
-        .angle = 0,
-        .h = 4,
-        .w = 0.5
+        .h = 1,
+        .w = 1
     };
     try_do(-1 == physic_add_primitive(&world, od, &primitive_rectangle_desc));
 
