@@ -1,4 +1,4 @@
-#define LOG_LVL LOG_LVL_ERROR
+// #define LOG_LVL LOG_LVL_DEBUG
 #include "util.h"
 #include "debug_draw.h"
 #include "physic.h"
@@ -61,4 +61,36 @@ void draw_circle(float x, float y, float r, float a)
             glVertex2f(x + r * cos(a+i), y + r * sin(a+i));
         }
     glEnd();
+}
+
+#define POINT_LINE_WIDTH 1
+#define POINT_CROSS_LINE_LEN 1
+#define POINT_SCALE 0.1
+void draw_point(float x, float y, float a)
+{
+    log_enter();
+    logd("x: %f, y: %f, a: %f", x, y, a);
+
+    glLineWidth(POINT_LINE_WIDTH);
+    glColor3f(1, 1, 0);
+    glPushMatrix();
+        glTranslatef(x, y, 0);
+        glRotatef(a / M_PI * 180 + 45, 0, 0, 1);
+        glScalef(POINT_SCALE, POINT_SCALE, 1);
+
+        glBegin(GL_LINE_LOOP);
+            float step = (2 * M_PI) / 16;
+            for (float i = 0; i < 2 * M_PI + step; i += step) {
+                glVertex2f(cos(a+i), sin(a+i));
+            }
+        glEnd();
+
+        glBegin(GL_LINES);
+            glVertex2f(-POINT_CROSS_LINE_LEN,  POINT_CROSS_LINE_LEN);
+            glVertex2f( POINT_CROSS_LINE_LEN, -POINT_CROSS_LINE_LEN);
+            glVertex2f( POINT_CROSS_LINE_LEN,  POINT_CROSS_LINE_LEN);
+            glVertex2f(-POINT_CROSS_LINE_LEN, -POINT_CROSS_LINE_LEN);
+        glEnd();
+
+    glPopMatrix();
 }

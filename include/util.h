@@ -11,7 +11,7 @@
 #define LOG_LVL_CRITICAL 4
 
 #ifndef LOG_LVL
-#define LOG_LVL LOG_LVL_ERROR
+#define LOG_LVL LOG_LVL_INFO
 #endif
 
 // log macros

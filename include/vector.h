@@ -1,9 +1,12 @@
-#pragma once
+#ifndef INCLUDE_VECTOR_H
+#define INCLUDE_VECTOR_H
 
 struct vector2f {
     float x;
     float y;
 };
+
+#define LOG_VECTOR(log_func, vector) log_func(#vector"(%f;%f)", vector.x, vector.y)
 
 /// @brief Get vector len
 /// @param a vector
@@ -38,3 +41,5 @@ float vector_projection(const struct vector2f *a, const struct vector2f *b);
 /// @param val scalar
 /// @return vector a multipled on scalar
 struct vector2f vector_mul_on_scalar(const struct vector2f *a, float val);
+
+#endif // INCLUDE_VECTOR_H
