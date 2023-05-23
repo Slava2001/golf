@@ -2,6 +2,7 @@
 #include "util.h"
 #include "physic.h"
 #include "physic-object.h"
+#include "physic-collider.h"
 
 #include <string.h>
 
@@ -20,5 +21,6 @@ int physic_update(struct physic_world *w, float elapsed_time_s)
         w->objects[i].angle += w->objects[i].speed_a * elapsed_time_s;
         try_do(update_collaider(w, i));
     }
+    try_do(physic_resolve_collisions(w));
     return 0;
 }

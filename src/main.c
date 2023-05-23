@@ -35,7 +35,7 @@ int main(int argc, char *argv[])
     try_do(physic_set_debug_draw_flag(&world, 0xff));
 
     struct physic_object_description obj_desc = {
-        .pos_x = 3,
+        .pos_x = 4,
         .pos_y = 5,
         .angle = M_PI_2
     };
@@ -43,19 +43,18 @@ int main(int argc, char *argv[])
     err_if(od == -1, "Failed to add object in world");
 
     struct physic_primitive_description primitive_rectangle_desc = {
-        .type = PPT_RECTANGLE,
+        .type = PPT_CIRCLE,
         .mass = 1,
         .offset_x = 1,
-        .h = 1,
-        .w = 1
+        .r = 0.5,
     };
     try_do(-1 == physic_add_primitive(&world, od, &primitive_rectangle_desc));
     primitive_rectangle_desc.offset_x = -2;
     try_do(-1 == physic_add_primitive(&world, od, &primitive_rectangle_desc));
-    try_do(-1 == physic_object_apply_impulse(&world, od, &(struct vector2f){ 1, 5 },
+    try_do(-1 == physic_object_apply_impulse(&world, od, &(struct vector2f){ 0, 1 },
                                                          &(struct vector2f){ 1, 0 }));
 
-    obj_desc.pos_x = 7;
+    obj_desc.pos_x = 5;
     od = physic_add_object(&world, &obj_desc);
     err_if(od == -1, "Failed to add object in world");
     primitive_rectangle_desc.offset_x = 1;

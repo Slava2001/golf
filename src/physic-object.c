@@ -104,6 +104,8 @@ int update_collaider(struct physic_world *w, int od)
     }
     o->aabb.delta.x = o->aabb.max.x - o->aabb.min.x;
     o->aabb.delta.y = o->aabb.max.y - o->aabb.min.y;
+    o->aabb.min = vector_add(&o->aabb.min, &o->mass_center);
+    o->aabb.max = vector_add(&o->aabb.max, &o->mass_center);
     return 0;
 }
 

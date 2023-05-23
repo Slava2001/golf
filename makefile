@@ -7,7 +7,8 @@ LD_FLAGS=-lfreeglut -lopengl32 -lm
 
 INCLUDES=./include
 
-SOURCE=./src/main.c ./src/physic.c ./src/physic-object.c ./src/physic-debug-draw.c ./src/physic-util.c ./src/debug_draw.c ./src/vector.c
+PHYSIC_LIB_SRC= ./src/physic.c ./src/physic-object.c ./src/physic-debug-draw.c ./src/physic-util.c ./src/physic-collider.c
+SOURCE=$(PHYSIC_LIB_SRC) ./src/main.c ./src/debug_draw.c ./src/vector.c
 OBJECTS=$(SOURCE:.c=.o)
 
 PROG_NAME=example
@@ -17,7 +18,7 @@ all: $(PROG_NAME)
 .c.o:
 	$(CC) -c $(C_FLAGS) -I$(INCLUDES) -I$(FREEGLUT_INCLUDE) $< -o $@
 
-start: $(PROG_NAME)
+start: clean $(PROG_NAME)
 	./$(PROG_NAME)
 
 $(PROG_NAME): $(OBJECTS)
